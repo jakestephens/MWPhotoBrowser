@@ -13,6 +13,7 @@
 #import "MWZoomingScrollView.h"
 
 // Declare private methods of browser
+API_AVAILABLE(ios(13.0))
 @interface MWPhotoBrowser () {
     
 	// Data
@@ -52,6 +53,9 @@
     UIBarButtonItem *_previousViewControllerBackButton;
     UIImage *_previousNavigationBarBackgroundImageDefault;
     UIImage *_previousNavigationBarBackgroundImageLandscapePhone;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+    UINavigationBarAppearance *_previousNavigationBarScrollEdgeAppearance;
+#endif
     
     // Video
     MPMoviePlayerViewController *_currentVideoPlayerViewController;

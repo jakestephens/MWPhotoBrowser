@@ -449,6 +449,11 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     navBar.barStyle = UIBarStyleBlackTranslucent;
     [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];
+    
+    if(@available(iOS 13.0, *))
+    {
+        self.navigationController.navigationBar.scrollEdgeAppearance = nil;
+    }
 }
 
 - (void)storePreviousNavBarAppearance {
@@ -460,6 +465,11 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     _previousNavBarStyle = self.navigationController.navigationBar.barStyle;
     _previousNavigationBarBackgroundImageDefault = [self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault];
     _previousNavigationBarBackgroundImageLandscapePhone = [self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsLandscapePhone];
+    
+    if(@available(iOS 13.0, *))
+    {
+        _previousNavigationBarScrollEdgeAppearance = self.navigationController.navigationBar.scrollEdgeAppearance;
+    }
 }
 
 - (void)restorePreviousNavBarAppearance:(BOOL)animated {
@@ -477,6 +487,11 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
             UIViewController *previousViewController = [self.navigationController topViewController]; // We've disappeared so previous is now top
             previousViewController.navigationItem.backBarButtonItem = _previousViewControllerBackButton;
             _previousViewControllerBackButton = nil;
+        }
+        
+        if(@available(iOS 13.0, *))
+        {
+            self.navigationController.navigationBar.scrollEdgeAppearance = _previousNavigationBarScrollEdgeAppearance;
         }
     }
 }
